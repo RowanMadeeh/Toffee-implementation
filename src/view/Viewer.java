@@ -2,13 +2,17 @@ package view;
 
 import model.Customer;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Viewer {
     private MainSystem mainSystem = new MainSystem();
     Scanner sc = new Scanner(System.in);
 
-    public void GuestView(){
+    public Viewer() throws IOException {
+    }
+
+    public void GuestView() throws IOException {
 
         System.out.println("\nWelcome to toffee ^_^");
 
@@ -29,6 +33,7 @@ public class Viewer {
                 MainSystem.catalog.View();
             }
             else{
+                mainSystem.Save();
                 System.out.println("nwrtna ^_^");
                 System.exit(0);
             }
@@ -37,29 +42,38 @@ public class Viewer {
         //when logged in call CustomerView or AdminView
     }
 
-    public void CustomerView(Customer customer){
+    public void CustomerView(Customer customer) throws IOException {
         System.out.println("\nWelcome " + customer.GetName() + " ^_^");
 
         while (true){
             System.out.println("\nChoose what do you want to do:");
-            System.out.println("1- View catalog\n2- AddToCart\n3- RemoveFromCart\n4- MakeOrder\n5- Reorder\n6- Exit");
+            System.out.println("1- View catalog\n2- View cart\n3- Exit");
             int op = sc.nextInt();
+            sc.nextLine();
             if(op == 1){
                 MainSystem.catalog.View();
+                System.out.println("\nChoose what do you want to do:");
+                System.out.println("1- AddToCart\n2- Exit");
+                op = sc.nextInt();
+                if(op == 1){
+                    customer.AddToCart();
+                }
+                sc.nextLine();
             }
             else if(op == 2){
-                customer.AddToCart();
-            }
-            else if(op == 3){
-                customer.RemoveFromCart();
-            }
-            else if(op == 4){
-                customer.MakeOrder();
-            }
-            else if(op == 5){
-                customer.Reorder();
+                customer.ViewCart();
+                System.out.println("\nChoose what do you want to do:");
+                System.out.println("1- Remove from cart\n2- Make order\n3- Exit");
+                op = sc.nextInt();
+                if(op == 1){
+                    customer.RemoveFromCart();
+                }
+                else if(op == 2){
+                    customer.MakeOrder();
+                }
             }
             else{
+                mainSystem.Save();
                 System.out.println("nwrtna ^_^");
                 System.exit(0);
             }

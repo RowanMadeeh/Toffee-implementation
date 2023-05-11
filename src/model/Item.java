@@ -26,7 +26,18 @@ public class Item {
         Quantity = quantity;
     }
 
-    public void View() {
+    public Item(Item other){
+        Name = other.Name;
+        Category = other.Category;
+        Brand = other.Brand;
+        UnitType = other.UnitType;
+        Status = other.Status;
+        Description = other.Description;
+        Price = other.Price;
+        Quantity = other.Quantity;
+    }
+
+    public void View(boolean total) {
 
         //view item details
 
@@ -36,7 +47,10 @@ public class Item {
         System.out.printf("%-25s", UnitType);
         System.out.printf("%-25s", Description);
         System.out.printf("%-20s", Quantity);
-        System.out.printf("%-20s", Price);
+        if(!total)
+            System.out.printf("%-20s", Price + " $");
+        else
+            System.out.printf("%-20s", Price * Quantity + " $");
         System.out.print(Status);
 
     }
@@ -45,9 +59,34 @@ public class Item {
         return Name;
     }
 
+    public String GetCategory(){
+        return Category;
+    }
+
+    public String GetBrand(){
+        return Brand;
+    }
+
+    public String GetUnitType(){
+        return UnitType;
+    }
+
+    public String GetStatus(){
+        return Status;
+    }
+
+    public String GetDescription(){
+        return Description;
+    }
+
+    public Float GetPrice(){
+        return Price;
+    }
+
     public int GetQuantity(){
         return Quantity;
     }
+
 
     public void SetName(String name) {
         Name = name;
@@ -65,19 +104,19 @@ public class Item {
         UnitType = unitType;
     }
 
-    public void setStatus(String status) {
+    public void SetStatus(String status) {
         Status = status;
     }
 
-    public void setDescription(String description) {
+    public void SetDescription(String description) {
         Description = description;
     }
 
-    public void setPrice(Float price) {
+    public void SetPrice(Float price) {
         Price = price;
     }
 
-    public void setQuantity(int quantity) {
+    public void SetQuantity(int quantity) {
         Quantity = quantity;
     }
 }

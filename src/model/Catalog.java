@@ -5,6 +5,10 @@ import java.util.Vector;
 public class Catalog {
     private Vector<Item> CatalogItems = new Vector<>();
 
+    public Vector<Item> GetCatalogItems(){
+        return CatalogItems;
+    }
+
     public boolean CheckItem(String Name){
         //
         for (int i = 0; i < CatalogItems.size(); i++) {
@@ -54,7 +58,7 @@ public class Catalog {
 
         for (int i = 0; i < CatalogItems.size(); i++) {
             System.out.printf("%-5s", i + 1 + "-");
-            CatalogItems.get(i).View();
+            CatalogItems.get(i).View(false);
             System.out.println();
         }
         System.out.println();
@@ -65,11 +69,16 @@ public class Catalog {
         CatalogItems.add(item);
     }
 
-    public void RemoveItem(String name){
+    public void RemoveItem(String name, int Quantity){
         //
         for (int i = 0; i < CatalogItems.size(); i++) {
             if(CatalogItems.get(i).GetName().equals(name)){
-                CatalogItems.remove(i);
+                int CurrentQuantity = CatalogItems.get(i).GetQuantity();
+                int NewQuantity = CurrentQuantity - Quantity;
+                CatalogItems.get(i).SetQuantity(NewQuantity);
+                if(NewQuantity == 0){
+                    CatalogItems.get(i).SetStatus("Sold");
+                }
                 return;
             }
         }
@@ -78,7 +87,6 @@ public class Catalog {
     public void UpdateItem(String name,String detail,String change){
         //
     }
-
 
 
     public void AddDiscount(String name, Float percentage){

@@ -1,8 +1,10 @@
 package view;
 
-import model.Catalog;
-import model.Customer;
+import model.*;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -10,8 +12,12 @@ public class MainSystem {
 
     private Vector<Customer> Registered = new Vector<>();
     public static Catalog catalog = new Catalog();
-    public static int orderNumber = 0;
+    public static int orderNumber;
     Scanner sc = new Scanner(System.in);
+
+    public MainSystem() throws IOException {
+        Load();
+    }
 
     public Pair<Integer, Customer> Login() {
 
@@ -72,5 +78,85 @@ public class MainSystem {
         Customer customer = new Customer(Name, Email, UserName, Password, PhoneNumber, Address);
         Registered.add(customer);
         System.out.println("Registered successfully");
+    }
+
+    public void Load() throws IOException {
+
+        File file = new File("Registered.txt");
+        FileReader Reader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(Reader);
+
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null){
+            ArrayList<String> data = new ArrayList<>(6);
+            data.addAll(Arrays.asList(line.split(",")));
+            Customer customer = new Customer(data.get(0),data.get(1),data.get(2),data.get(3),Integer.parseInt(data.get(4)),data.get(5));
+            Registered.add(customer);
+        }
+
+        Reader.close();
+        bufferedReader.close();
+
+        file = new File("Catalog.txt");
+        Reader = new FileReader(file);
+        bufferedReader = new BufferedReader(Reader);
+
+        while ((line = bufferedReader.readLine()) != null){
+            ArrayList<String> data = new ArrayList<>(8);
+            data.addAll(Arrays.asList(line.split(",")));
+            Item item = new Item(data.get(0),data.get(1),data.get(2),data.get(3),data.get(4),data.get(5),Float.parseFloat(data.get(6)),Integer.parseInt(data.get(7)));
+            catalog.AddItem(item);
+        }
+
+        Reader.close();
+        bufferedReader.close();
+
+        file = new File("OrderNumber.txt");
+        Reader = new FileReader(file);
+        bufferedReader = new BufferedReader(Reader);
+
+        line = bufferedReader.readLine();
+        orderNumber = Integer.parseInt(line);
+
+        Reader.close();
+        bufferedReader.close();
+    }
+
+    public void Save() throws IOException {
+        File file = new File("Registered.txt");
+        FileWriter Writer = new FileWriter(file);
+        for (int i = 0; i < Registered.size(); i++) {
+            Writer.write(Registered.get(i).GetName() + ",");
+            Writer.write(Registered.get(i).GetEmail() + ",");
+            Writer.write(Registered.get(i).GetUsername() + ",");
+            Writer.write(Registered.get(i).GetPassword() + ",");
+            Writer.write(Registered.get(i).GetPhoneNumber() + ",");
+            Writer.write(Registered.get(i).GetAddress() + ",");
+            Writer.write(Registered.get(i).GetStatus() + "\n");
+        }
+        Writer.close();
+
+        file = new File("Catalog.txt");
+        Writer = new FileWriter(file);
+        Vector<Item>c = catalog.GetCatalogItems();
+        for (int i = 0; i < c.size(); i++) {
+            Writer.write(c.get(i).GetName() + ",");
+            Writer.write(c.get(i).GetCategory() + ",");
+            Writer.write(c.get(i).GetBrand() + ",");
+            Writer.write(c.get(i).GetUnitType() + ",");
+            Writer.write(c.get(i).GetStatus() + ",");
+            Writer.write(c.get(i).GetDescription() + ",");
+            Writer.write(c.get(i).GetPrice() + ",");
+            Writer.write(c.get(i).GetQuantity() + "\n");
+        }
+
+        Writer.close();
+
+        file = new File("OrderNumber.txt");
+        Writer = new FileWriter(file);
+        Writer.write(String.valueOf(orderNumber));
+
+        Writer.close();
     }
 }

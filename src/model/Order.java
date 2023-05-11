@@ -1,16 +1,16 @@
 package model;
 
-import controller.Cart;
-
 public class Order {
-    private Cart cart = new Cart();
+
+    private Cart cart;
     private int OrderNumber;
     private String OrderStatus;
-    private Float TotalAmount;
-    public Order(Cart _cart, int orderNumber, String orderStatus, Float totalAmount){
+    private String DestinationAddress;
+
+    public Order(Cart _cart, int orderNumber, String orderStatus, String destinationAddress){
         cart = _cart;
         OrderNumber = orderNumber;
         OrderStatus = orderStatus;
-        TotalAmount = totalAmount;
+        DestinationAddress = destinationAddress;
     }
 }

@@ -1,0 +1,3 @@
+toffee,sweets,msh 3arf,kelo,Available,gamd gdn,50.0,2
+jelly beans,sweets,msh 3arf,gram,Available,gamd gdn,50.0,10
+chocolate,sweets,3arf,kelo,Sold,gamd,40.0,0
