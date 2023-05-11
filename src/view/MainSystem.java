@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Vector;
 
+/**
+ * The MainSystem class represents the main system of the application.
+ * It manages the login process and the catalog.
+ */
 public class MainSystem {
 
     private Vector<Customer> Registered = new Vector<>();
@@ -15,10 +19,22 @@ public class MainSystem {
     public static int orderNumber;
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Constructs a MainSystem object and loads the data from files.
+     *
+     * @throws IOException if there is an error reading the files
+     */
     public MainSystem() throws IOException {
         Load();
     }
 
+    /**
+     * Handles the login process.
+     *
+     * @return a Pair object containing an integer and a Customer object:
+     *         - the integer value represents the login result (0 for failure, 1 for success)
+     *         - the Customer object represents the logged in customer (empty if the login failed)
+     */
     public Pair<Integer, Customer> Login() {
 
         //take username and password then check if it is in Registered and not in LoggedIn
@@ -42,6 +58,13 @@ public class MainSystem {
         System.out.println("Invalid username or password, Please try again");
         return new Pair<>(0, new Customer());
     }
+
+    /**
+     This method allows a customer to register by taking their personal information such as name, email, username, password,
+     phone number, and address. The method checks if the username is not taken before, creates a customer object using the provided information,
+     and adds the customer to the Registered list.
+     @return void
+     */
 
     public void Register() {
 
@@ -80,6 +103,12 @@ public class MainSystem {
         System.out.println("Registered successfully");
     }
 
+    /**
+     The Load method reads the data from the Registered.txt file and loads the customers' information into the Registered vector.
+     It also reads the data from the Catalog.txt file and loads the items into the catalog.
+     Finally, it reads the data from the OrderNumber.txt file and loads the order number.
+     @throws IOException when the file is not found or when there is an error reading from the file.
+     */
     public void Load() throws IOException {
 
         File file = new File("Registered.txt");
@@ -123,6 +152,12 @@ public class MainSystem {
         bufferedReader.close();
     }
 
+    /**
+
+     Saves the customer information, catalog information, and order number to their respective files.
+
+     @throws IOException If there is an error while writing to any of the files.
+     */
     public void Save() throws IOException {
         File file = new File("Registered.txt");
         FileWriter Writer = new FileWriter(file);

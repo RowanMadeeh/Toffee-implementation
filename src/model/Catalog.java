@@ -2,6 +2,10 @@ package model;
 
 import java.util.Vector;
 
+/**
+
+ The Catalog class represents a catalog of items.
+ */
 public class Catalog {
     private Vector<Item> CatalogItems = new Vector<>();
 
@@ -9,6 +13,11 @@ public class Catalog {
         return CatalogItems;
     }
 
+    /**
+     Checks if an item exists in the catalog.
+     @param Name the name of the item to check.
+     @return true if the item exists in the catalog, false otherwise.
+     */
     public boolean CheckItem(String Name){
         //
         for (int i = 0; i < CatalogItems.size(); i++) {
@@ -19,6 +28,12 @@ public class Catalog {
         return false;
     }
 
+    /**
+     Checks if an item exists in the catalog with the specified quantity available.
+     @param Name the name of the item to check.
+     @param Quantity the quantity of the item to check.
+     @return true if the item exists in the catalog with the specified quantity available, false otherwise.
+     */
     public boolean CheckItem(String Name, int Quantity){
         //
 
@@ -31,6 +46,11 @@ public class Catalog {
         return false;
     }
 
+    /**
+     Returns the item with the specified name.
+     @param Name the name of the item to get.
+     @return the item with the specified name, or a new Item object if the item is not found.
+     */
     public Item GetItem(String Name){
         //
 
@@ -43,6 +63,9 @@ public class Catalog {
         return new Item();
     }
 
+    /**
+     Displays the items in the catalog.
+     */
     public void View(){
 
         //view items in catalog
@@ -64,11 +87,21 @@ public class Catalog {
         System.out.println();
     }
 
+    /**
+     Adds an item to the catalog.
+     @param item the item to add
+     */
+
     public void AddItem(Item item){
         //
         CatalogItems.add(item);
     }
 
+    /**
+     Removes the specified quantity of an item from the catalog and updates its quantity and status accordingly.
+     @param name the name of the item to remove
+     @param Quantity the quantity to remove
+     */
     public void RemoveItem(String name, int Quantity){
         //
         for (int i = 0; i < CatalogItems.size(); i++) {
