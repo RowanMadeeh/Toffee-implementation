@@ -185,16 +185,11 @@ public class Customer {
             System.out.println("Sorry your cart is empty");
             return;
         }
-        Order order = new Order(CurrentCart, MainSystem.orderNumber, "Not delivered", Address);
+        Order order = new Order(CurrentCart, MainSystem.orderNumber, "delivered", Address);
         MainSystem.orderNumber++;
         CurrentCart.Clear();
 
-        System.out.println("Order made successfully");
+        System.out.println("Order made successfully, it will be sent to you within 2 days");
     }
-
-//    public void Reorder() {
-//        //take the orderNumber from the user and search for it in Orders
-//        //if it exists make currentCart = order.Cart and call MakeOrder()
-//    }
 
 }

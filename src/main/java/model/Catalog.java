@@ -116,13 +116,4 @@ public class Catalog {
             }
         }
     }
-
-    public void UpdateItem(String name,String detail,String change){
-        //
-    }
-
-
-    public void AddDiscount(String name, Float percentage){
-        //
-    }
 }

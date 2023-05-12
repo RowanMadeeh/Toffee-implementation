@@ -5,6 +5,7 @@ import model.*;
 import java.io.*;
 import java.util.*;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 /**
  * The MainSystem class represents the main system of the application.
@@ -57,6 +58,18 @@ public class MainSystem {
         return new Pair<>(0, new Customer());
     }
 
+    public boolean patternMatches(String emailAddress, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
+    }
+
+    public boolean ValidEmail(String Email){
+        String regexPattern = "^[A-Za-z0-9_-]*(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        return patternMatches(Email, regexPattern);
+    }
+
     /**
      * This method allows a customer to register by taking their personal information such as name, email, username, password,
      * phone number, and address. The method checks if the username is not taken before, creates a customer object using the provided information,
@@ -77,6 +90,11 @@ public class MainSystem {
         String Email = sc.nextLine();
 
         //check if email is valid
+
+        while (!ValidEmail(Email)){
+            System.out.print("Invalid email!!, Please enter a valid email: ");
+            Email = sc.nextLine();
+        }
 
         System.out.print("Please enter your username: ");
         String UserName = sc.nextLine();
@@ -107,13 +125,16 @@ public class MainSystem {
         System.out.print("Please enter your Address: ");
         String Address = sc.nextLine();
 
+        System.out.println("There will be a code sent to you in few seconds");
+
         boolean ret = Authentication(Email);
 
         if (ret) {
             Customer customer = new Customer(Name, Email, UserName, Password, PhoneNumber, Address);
             Registered.add(customer);
             System.out.println("Registered successfully");
-        } else {
+        }
+        else {
             System.out.println("Invalid code!!, Please try again later");
         }
     }

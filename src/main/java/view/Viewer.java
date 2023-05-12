@@ -13,7 +13,7 @@ public class Viewer {
     public Viewer() throws IOException {
     }
 
-    public void GuestView() throws IOException, MessagingException {
+    public void GuestView() throws IOException{
 
         System.out.println("\nWelcome to toffee ^_^");
 
