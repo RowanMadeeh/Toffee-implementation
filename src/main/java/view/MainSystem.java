@@ -203,8 +203,7 @@ public class MainSystem {
             Writer.write(Registered.get(i).GetUsername() + ",");
             Writer.write(Registered.get(i).GetPassword() + ",");
             Writer.write(Registered.get(i).GetPhoneNumber() + ",");
-            Writer.write(Registered.get(i).GetAddress() + ",");
-            Writer.write(Registered.get(i).GetStatus() + "\n");
+            Writer.write(Registered.get(i).GetAddress() + "\n");
         }
         Writer.close();
 

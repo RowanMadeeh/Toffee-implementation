@@ -24,4 +24,7 @@ public class Order {
         OrderStatus = orderStatus;
         DestinationAddress = destinationAddress;
     }
+    public void SetOrderStatus(String orderStatus){
+        OrderStatus = orderStatus;
+    }
 }

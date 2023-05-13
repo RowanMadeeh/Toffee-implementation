@@ -33,7 +33,7 @@ public class Customer {
     }
     /**
      Constructs a new customer object with the given name, email, username, password, phone number, and address.
-     @param name The customer's name.
+     m@para name The customer's name.
      @param email The customer's email.
      @param username The customer's username.
      @param password The customer's password.
@@ -190,6 +190,8 @@ public class Customer {
         CurrentCart.Clear();
 
         System.out.println("Order made successfully, it will be sent to you within 2 days");
+        System.out.println("Order delivered successfully ^_^");
+        order.SetOrderStatus("delivered");
     }
 
 }
